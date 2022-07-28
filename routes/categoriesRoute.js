@@ -4,7 +4,7 @@ const con = require("../lib/db_connection");
 
 router.get("/", (req, res) => {
     try {
-        con.query("SELECT * FROM users", (err, result) => {
+        con.query("SELECT * FROM categories", (err, result) => {
             if (err) throw err;
             res.send(result);
         });
@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     }
 });
 
-router.get("/.id", (req, res) => {
+router.get("/", (req, res) => {
     try{
         res.send({ id: req.params.id});
     } catch (error) {
@@ -23,12 +23,13 @@ router.get("/.id", (req, res) => {
     }
 });
 
+
 router.post("/", (req, res) => {
-    const {email, password, full_name, billing_address, default_shipping_address, country, phone, user_type} = req.body;
+    const {name, description, thumbnail} = req.body;
     try {
         con.query(
             //When using the ${}, the content of con.query MUST be in the back tick
-            `INSERT INTO users (email, password, full_name, billing_address, default_shipping_address, country, phone, user_type) VALUES ("${email}", "${password}", "${full_name}", "${billing_address}", "${default_shipping_address}", "${country}", "${phone}", "${user_type}")`,
+            `INSERT INTO categories (name, description, thumbnail) VALUES ("${name}", "${description}", "${thumbnail}" )`,
             (err, result) => {
               if (err) throw err;
               res.send(result);
@@ -39,6 +40,7 @@ router.post("/", (req, res) => {
           res.status(400).send(error);
     } 
 });
+
 
 
 module.exports = router;

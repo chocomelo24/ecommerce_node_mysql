@@ -12,8 +12,19 @@ app.get("/", (req, res) => {
 });
 
 const userRoute = require("./routes/userRouter");
+const productsRouter = require("./routes/productsRouter");
+const ordersRouter = require("./routes/ordersRoute");
+const categoriesRoute = require("./routes/categoriesRoute");
+const order_detailsRoute = require("./routes/order_detailsRoute");
+const product_categoriesRoute = require("./routes/product_categoriesRoute");
 
 app.use("/users", userRoute)
+app.use("/products", productsRouter)
+app.use("/orders", ordersRouter)
+app.use("/categories", categoriesRoute)
+app.use("/order_details", order_detailsRoute)
+app.use("/product_categories", product_categoriesRoute)
+
 
 app.listen(app.get("port"), () => {
     console.log(`Listening for calls on port ${app.get("port")}`);
