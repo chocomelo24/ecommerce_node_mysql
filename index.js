@@ -6,9 +6,10 @@ const app = express(); // Initialize express as an app variable
 app.set("port", process.env.PORT || 6969); // Set the port
 app.use(express.json()); // Enable the server to handle JSON requests
 app.use(cors()); // Dont let local development give errors
+app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-    res.json({ msg: "Hello There" });
+app.get("/", function (req, res) {
+  res.sendFile(__dirname + "/" + "index.html");
 });
 
 const userRoute = require("./routes/userRouter");
@@ -29,4 +30,8 @@ app.use("/product_categories", product_categoriesRoute)
 app.listen(app.get("port"), () => {
     console.log(`Listening for calls on port ${app.get("port")}`);
     console.log("Press Ctrl+C to exit server");
+});
+app.use(express.static("public"));
+app.get("/", function (req, res) {
+  res.sendFile(_dirname + "/" + "login.html");
 });

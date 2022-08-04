@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
         console.log(error);
         res.status(400).send(error)
     }
-});
+});    
 
 router.get("/", (req, res) => {
     try{
@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
         console.log(error);
         res.status(400).send(error)
     }
-});
+}); 
 
 
 router.post("/", (req, res) => {
